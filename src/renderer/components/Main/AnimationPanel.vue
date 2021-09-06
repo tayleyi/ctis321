@@ -2,33 +2,34 @@
 	<div>
 		<template v-if="scheduleAlgo == 'fcfs'">
 			<h1>First Come, First Serve</h1>
-			<span v-for="i in sortByTime()">
-				<span :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem', border: 'solid 1px black'}">
+			<span class="container">
+				<span class="child-box" :style="{flex: i.length  + ' 0 0' }" v-for="i in sortByTime()">
+<!-- :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" -->
 					{{ i.index }} (t = {{ i.length }})
 				</span>
 			</span>
 		</template>
 		<template v-else-if="scheduleAlgo == 'sjf'">
 			<h1>Shortest Job First</h1>
-			<span v-for="i in sortByLength()">
-				<span :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem', border: 'solid 1px black'}">
+			<span class="container">
+				<span class="child-box" :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" v-for="i in sortByLength()">
 					{{ i.index }} (t = {{ i.length }})
 				</span>
 			</span>
 		</template>
 		<template v-else-if="scheduleAlgo == 'priority'">
 			<h1>Priority</h1>
-			<span v-for="i in sortByPriority()">
-				<span :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem', border: 'solid 1px black'}">
+			<span class="container">
+				<span class="child-box" :style="{padding: '0 ' + (i.length * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" v-for="i in sortByPriority()">
 					{{ i.index }} (t = {{ i.length }})
 				</span>
 			</span>
 		</template>
 		<template v-else>
 			<h1>Round-Robin with a Time-Quantum of {{ slice }}</h1>
-			<span v-for="i in 3">
-				<span v-if="true"
-					:style="{padding: '0 ' + (slice * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem', border: 'solid 1px black'}">
+			<span class="container">
+				<span class="child-box" v-if="true"
+					:style="{padding: '0 ' + (slice * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" v-for="i in 3">
 						{{ i }}
 				</span>
 			</span>
@@ -120,3 +121,16 @@
 		}
 	}
 </script>
+
+<style scoped>
+	.container {
+		display: flex;
+		flex-flow: row wrap;
+		margin: 2rem 0 2rem 0;
+	}
+	.child-box {
+		border: solid 1px black;
+		padding: 1rem;
+		margin: 0.2rem;
+	}
+</style>

@@ -98,7 +98,7 @@
 <style scoped>
 	div {
 		font-size: 1rem;
-		margin: 0.2rem;
+		margin: 1rem;
 	}
 	.toggle-body {
 		width: 20vmin;
