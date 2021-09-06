@@ -29,8 +29,8 @@
 			<h1>Round-Robin with a Time-Quantum of {{ slice }}</h1>
 			<span class="container">
 				<span class="child-box" v-if="true"
-					:style="{padding: '0 ' + (slice * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" v-for="i in 3">
-						{{ i }}
+					:style="{padding: '0 ' + (slice * 2) + 'rem' + ' 0 ' + (slice * 2) + 'rem'}" v-for="i in sortRoundRobin()">
+						{{ i.index }} (t = {{ i.length }})
 				</span>
 			</span>
 		</template>
@@ -108,11 +108,38 @@
 					}
 				}
 				return returnedArray;
-			}
-		},
-		computed: {
-			totalLength: function () {
-				return calculateTotalLength(this.processList);
+			},
+			sortRoundRobin () {
+console.log('start');
+				let originalArray = JSON.parse(JSON.stringify(this.processList));
+				let returnedArray = new Array(originalArray.length);
+				let counter = 0;
+				let counterA = 0;
+/*				while (counter < originalArray.length) {
+*/					for (let i = 0; i < originalArray.length; i++) {
+console.log(originalArray[i]);
+						if (originalArray[i].length > this.slice) {
+console.log(originalArray[i] + "\t" + counterA);
+							returnedArray.splice(counterA, 0, originalArray[i]);
+							returnedArray[counterA].length = this.slice;
+							returnedArray[counterA].index = i;
+							counterA++;
+							originalArray[i].length -= this.slice;
+						}
+						else if (originalArray[i].length <= 0) {
+							continue;
+						}
+						else {
+							returnedArray.splice(counterA, 0, originalArray[i]);
+							returnedArray[counterA].index = i;
+							counterA++;
+							counter++;
+						}
+					}
+/*				}
+*/
+console.log("returned " + returnedArray);
+				return returnedArray;
 			}
 		},
 		data () {
