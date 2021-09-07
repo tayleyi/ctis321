@@ -3,8 +3,8 @@
 		<button @click="updateArray()" type="button">schedule processes</button>
 
 		<div>
-			<p>Number of Processes:</p>
-			<input v-model="processes.length" />
+			<p>Number of Processes: 3</p>
+<!--			<input v-model="processes.length" />			-->
 		</div>
 
 		<br>

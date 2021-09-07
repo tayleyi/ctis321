@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="right-panel">
 		<template v-if="scheduleAlgo == 'fcfs'">
 			<h1>First Come, First Serve</h1>
 			<span class="container">
@@ -108,7 +108,6 @@
 				return returnedArray;
 			},
 			sortRoundRobin () {
-console.log('start');
 				let originalArray = JSON.parse(JSON.stringify(this.processList));
 				let returnedArray = [];
 				let counter = 0;
@@ -128,19 +127,15 @@ console.log('start');
 							continue;
 						}
 						else {
-							returnedArray.splice(counterA, 0, originalArray[i]);
-							returnedArray[counterA].index = i;
+							let temp = JSON.parse(JSON.stringify(originalArray[i]));
+							returnedArray.splice(counterA, 0, temp);
 
 							originalArray[i].length -= this.slice;
 							counterA++;
 							counter++;
 						}
-console.log(counterA + '\t' + returnedArray.length + '\t' + returnedArray[counterA - 1].length);
 					}
 				}
-
-console.log("returned ");
-console.log(returnedArray);
 				return returnedArray;
 			}
 		},
@@ -152,6 +147,11 @@ console.log(returnedArray);
 </script>
 
 <style scoped>
+	.right-panel {
+		position: fixed;
+		left: 30%;
+		width: 65%;
+	}
 	.container {
 		display: flex;
 		flex-flow: row wrap;
